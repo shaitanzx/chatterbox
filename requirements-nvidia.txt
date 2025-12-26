@@ -1,4 +1,4 @@
-numpy==1.26.4
+numpy==1.25.2
 tensorflow==2.12.0
 russtress==0.1.4
 ruaccent
