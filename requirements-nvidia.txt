@@ -21,14 +21,14 @@ chardet
 
 # Chatterbox TTS engine - Install from chatterbox-v2 fork
 #chatterbox-tts @ git+https://github.com/devnen/chatterbox-v2.git@master
-chatterbox-tts @ git+https://github.com/shaitanzx/chaterbox_ttx.git
+git+https://github.com/shaitanzx/chaterbox_ttx.git
 
 # Core Web Framework
 fastapi
 uvicorn[standard]
 
 # Other ML & Audio Libraries
-numpy>=1.24.0,<1.26.0  # Match chatterbox-v2 requirements
+#numpy>=1.24.0,<1.26.0  # Match chatterbox-v2 requirements
 soundfile  # Requires libsndfile system library
 librosa
 safetensors
