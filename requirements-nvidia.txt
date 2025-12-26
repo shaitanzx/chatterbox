@@ -1,9 +1,4 @@
-numpy==1.25.2
-tensorflow==2.14.0
-onnx==1.16.0
-russtress==0.1.4
-ruaccent
-chardet
+
 
 
 # requirements-nvidia.txt (For NVIDIA GPU Installation with CUDA 12.1)
