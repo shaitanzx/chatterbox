@@ -29,7 +29,7 @@ uvicorn[standard]
 
 # Other ML & Audio Libraries
 #numpy>=1.24.0,<1.26.0  # Match chatterbox-v2 requirements
-soundfile  # Requires libsndfile system library
+soundfile  
 librosa
 safetensors
 descript-audio-codec
