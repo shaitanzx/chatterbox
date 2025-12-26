@@ -1,9 +1,9 @@
 numpy==1.25.2
-tensorflow==2.12.0
+tensorflow==2.14.0
 russtress==0.1.4
 ruaccent
 chardet
-onnx==1.16.0
+
 
 # requirements-nvidia.txt (For NVIDIA GPU Installation with CUDA 12.1)
 # This file ensures a compatible set of CUDA-enabled torch packages are installed.
