@@ -21,7 +21,7 @@ chardet
 
 # Chatterbox TTS engine - Install from chatterbox-v2 fork
 #chatterbox-tts @ git+https://github.com/devnen/chatterbox-v2.git@master
-git+https://github.com/shaitanzx/chaterbox_ttx.git
+#chatterbox-tts @ git+https://github.com/shaitanzx/chaterbox_ttx.git
 
 # Core Web Framework
 fastapi
