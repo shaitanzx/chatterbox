@@ -1,0 +1,42 @@
+# requirements-nvidia.txt (For NVIDIA GPU Installation with CUDA 12.8)
+# This file ensures a compatible set of CUDA-enabled torch packages are installed.
+
+# Use the official PyTorch package index for CUDA 12.8.
+--extra-index-url https://download.pytorch.org/whl/cu128
+
+# Pinning a compatible set of torch-related libraries is crucial to avoid dependency conflicts.
+# Updated to use PyTorch 2.7.1 for compatibility with our Colab-compatible chatterbox fork
+torch==2.7.1+cu128
+torchvision==0.22.1+cu128
+torchaudio==2.7.1+cu128
+
+# --- Core Application Dependencies ---
+git+https://github.com/LeeAeron/chatterbox.git
+
+# Core Web Framework
+fastapi
+uvicorn[standard]
+
+# Other ML & Audio Libraries
+numpy  # More flexible to avoid conflicts
+soundfile  # Requires libsndfile system library
+librosa
+safetensors
+descript-audio-codec
+
+# Configuration & Utilities
+PyYAML
+python-multipart
+requests
+Jinja2
+watchdog
+aiofiles
+unidecode
+inflect
+tqdm
+hf_transfer                     # Speed up file transfers
+
+# Audio Post-processing
+pydub
+audiotsm
+praat-parselmouth
