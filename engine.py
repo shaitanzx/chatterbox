@@ -46,7 +46,8 @@ class PatchedChatterboxTTS(ChatterboxMultilingualTTS):
         # --- This is the original code from the library ---
         ve = VoiceEncoder()
         ve.load_state_dict(
-            torch.load(ckpt_dir / "ve.pt", weights_only=True)
+            ###########torch.load(ckpt_dir / "ve.pt", weights_only=True)
+            torch.load(ckpt_dir / "ve.pt", map_location=device, weights_only=True)
         )
         ve.to(device).eval()
         
@@ -90,7 +91,8 @@ class PatchedChatterboxTTS(ChatterboxMultilingualTTS):
 
         s3gen = S3Gen()
         s3gen.load_state_dict(
-            torch.load(ckpt_dir / "s3gen.pt", weights_only=True)
+            ######torch.load(ckpt_dir / "s3gen.pt", weights_only=True)
+            torch.load(ckpt_dir / "s3gen.pt", map_location=device, weights_only=True)
         )
         s3gen.to(device).eval()
 
