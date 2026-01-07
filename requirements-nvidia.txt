@@ -41,3 +41,7 @@ hf_transfer                     # Speed up file transfers
 pydub
 audiotsm
 praat-parselmouth
+
+russtress==0.1.4
+ruaccent
+chardet
