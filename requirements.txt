@@ -10,55 +10,42 @@
 
 # --- Deep Learning Framework (CPU-Only) ---
 # Updated to match chatterbox-tts requirement for torch==2.7.1
-torch==2.7.1
-torchvision==0.22.1
-torchaudio==2.7.1
+torch==2.5.1
+torchvision==0.20.1
+torchaudio==2.5.1
 
-# --- Core TTS Application ---
-# Chatterbox TTS engine - installed directly from GitHub
-git+https://github.com/LeeAeron/chatterbox.git
-# --- Web Framework & Server ---
-fastapi                         # Modern async web framework
-uvicorn[standard]               # ASGI server with performance extras
+# --- Core Application Dependencies ---
 
-# --- Scientific Computing & ML Libraries ---
-numpy                   # Fundamental numerical computing
-librosa                         # Advanced audio/music analysis
-safetensors                     # Safe tensor serialization format
-descript-audio-codec            # Audio codec for ML applications
+# Chatterbox TTS engine - Install from chatterbox-v2 fork
+chatterbox-tts @ file:./src/chatterbox-main
+# Core Web Framework
+fastapi
+uvicorn[standard]
 
-# --- Audio I/O & Processing ---
-soundfile                       # Audio file I/O (requires libsndfile system library)
-pydub                          # Simple audio manipulation
-audiotsm                       # Audio time-scale modification
-praat-parselmouth              # Python interface to Praat speech analysis
-                               # NOTE: Use 'praat-parselmouth' not 'parselmouth' 
-                               # to avoid setuptools use_2to3 compatibility issues
+# Other ML & Audio Libraries
+numpy>=1.24.0,<1.26.0  # Match chatterbox-v2 requirements
+soundfile  # Requires libsndfile system library
+librosa
+safetensors
+descript-audio-codec
 
-# --- Web & API Utilities ---
-python-multipart               # Form data parsing for FastAPI
-requests                       # HTTP client library
-Jinja2                        # Template engine
-aiofiles                      # Async file operations
-hf_transfer                     # Speed up file transfers with the Hugging Face Hub.
+# Configuration & Utilities
+PyYAML
+python-multipart
+requests
+Jinja2
+watchdog
+aiofiles
+unidecode
+inflect
+tqdm
+hf_transfer                     # Speed up file transfers
 
+# Audio Post-processing
+pydub
+audiotsm
+praat-parselmouth
 
-# --- Configuration & Data Processing ---
-PyYAML                        # YAML configuration file support
-watchdog                      # File system event monitoring
-unidecode                     # Unicode text transliteration
-inflect                       # Natural language inflection
-tqdm                          # Progress bars for loops
-
-# ============================================================================
-# INSTALLATION NOTES:
-# 
-# 1. Ensure your virtual environment is activated before installation
-# 2. Run: pip install --upgrade pip
-# 3. Run: pip install -r requirements.txt
-# 4. For parselmouth issues, the package name is 'praat-parselmouth' on PyPI
-#    but you import it as 'import parselmouth' in Python code
-# 5. System dependencies may be required:
-#    - libsndfile (for soundfile package)
-#    - FFmpeg (for some audio processing features)
-# ============================================================================
+russtress==0.1.4
+ruaccent
+chardet
