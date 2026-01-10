@@ -189,12 +189,54 @@ def load_model() -> bool:
         if device_setting == "auto":
             if _test_cuda_functionality():
                 resolved_device_str = "cuda"
+                logger.info("CUDA functionality test passed. Using CUDA.")
+            elif _test_mps_functionality():
+                resolved_device_str = "mps"
+                logger.info("MPS functionality test passed. Using MPS.")
+            else:
+                resolved_device_str = "cpu"
+                logger.info("CUDA and MPS not functional or not available. Using CPU.")
+
+        elif device_setting == "cuda":
+            if _test_cuda_functionality():
+                resolved_device_str = "cuda"
+                logger.info("CUDA requested and functional. Using CUDA.")
+            else:
+                resolved_device_str = "cpu"
+                logger.warning(
+                    "CUDA was requested in config but functionality test failed. "
+                    "PyTorch may not be compiled with CUDA support. "
+                    "Automatically falling back to CPU."
+                )
+
+        elif device_setting == "mps":
+            if _test_mps_functionality():
+                resolved_device_str = "mps"
+                logger.info("MPS requested and functional. Using MPS.")
+            else:
+                resolved_device_str = "cpu"
+                logger.warning(
+                    "MPS was requested in config but functionality test failed. "
+                    "PyTorch may not be compiled with MPS support. "
+                    "Automatically falling back to CPU."
+                )
+
+        elif device_setting == "cpu":
+            resolved_device_str = "cpu"
+            logger.info("CPU device explicitly requested in config. Using CPU.")
+
+        else:
+            logger.warning(
+                f"Invalid device setting '{device_setting}' in config. "
+                f"Defaulting to auto-detection."
+            )
+            if _test_cuda_functionality():
+                resolved_device_str = "cuda"
             elif _test_mps_functionality():
                 resolved_device_str = "mps"
             else:
                 resolved_device_str = "cpu"
-        else:
-            resolved_device_str = device_setting
+            logger.info(f"Auto-detection resolved to: {resolved_device_str}")
         model_device = resolved_device_str
         logger.info(f"Final device selection: {model_device}")
 
