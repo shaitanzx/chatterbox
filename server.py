@@ -3,7 +3,46 @@
 # Handles API requests for text-to-speech generation, UI serving,
 # configuration management, and file uploads.
 
+
 import os
+from pathlib import Path
+# Импортируем config_manager ПЕРВЫМ ДЕЛОМ
+from config import (
+    config_manager,
+    get_host,
+    get_port,
+    get_log_file_path,
+    get_output_path,
+    get_reference_audio_path,
+    get_predefined_voices_path,
+    get_ui_title,
+    get_gen_default_temperature,
+    get_gen_default_exaggeration,
+    get_gen_default_cfg_weight,
+    get_gen_default_seed,
+    get_gen_default_speed_factor,
+    get_gen_default_language,
+    get_audio_sample_rate,
+    get_full_config_for_template,
+    get_audio_output_format,
+)
+
+# Получаем путь к кэшу из конфигурации
+model_cache_path = config_manager.get_path("paths.model_cache", "./model_cache", ensure_absolute=True)
+
+# Устанавливаем переменные окружения ПЕРЕД любыми импортами huggingface
+os.environ["HF_HOME"] = str(model_cache_path)
+os.environ["HF_HUB_CACHE"] = str(model_cache_path)
+os.environ["TRANSFORMERS_CACHE"] = str(model_cache_path)
+os.environ["TORCH_HOME"] = str(model_cache_path)
+os.environ["HUGGINGFACE_HUB_CACHE"] = str(model_cache_path)
+os.environ["XDG_CACHE_HOME"] = str(model_cache_path.parent)
+
+
+
+
+
+
 import io
 import logging
 import logging.handlers  # For RotatingFileHandler
@@ -13,7 +52,7 @@ import uuid
 import yaml  # For loading presets
 import numpy as np
 import librosa  # For potential direct use if needed, though utils.py handles most
-from pathlib import Path
+
 from contextlib import asynccontextmanager
 from typing import Optional, List, Dict, Any, Literal
 import webbrowser  # For automatic browser opening
@@ -77,25 +116,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 
 # --- Internal Project Imports ---
-from config import (
-    config_manager,
-    get_host,
-    get_port,
-    get_log_file_path,
-    get_output_path,
-    get_reference_audio_path,
-    get_predefined_voices_path,
-    get_ui_title,
-    get_gen_default_temperature,
-    get_gen_default_exaggeration,
-    get_gen_default_cfg_weight,
-    get_gen_default_seed,
-    get_gen_default_speed_factor,
-    get_gen_default_language,
-    get_audio_sample_rate,
-    get_full_config_for_template,
-    get_audio_output_format,
-)
+
 
 import engine  # TTS Engine interface
 from models import (  # Pydantic models

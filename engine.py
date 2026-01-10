@@ -199,17 +199,7 @@ def load_model() -> bool:
         logger.info(f"Final device selection: {model_device}")
 
         # Load the multilingual engine immediately
-
-        model_cache_path = config_manager.get_path("paths.model_cache", "./model_cache", ensure_absolute=True)
-                
-        logger.info(f"Using model cache directory: {model_cache_path}")
         
-        # Устанавливаем переменные окружения ПЕРЕД загрузкой модели
-        os.environ["HF_HOME"] = str(model_cache_path)
-        os.environ["HF_HUB_CACHE"] = str(model_cache_path)
-        
-        logger.info(f"Environment set: HF_HOME={os.environ.get('HF_HOME')}")
-
         multilingual_model = PatchedChatterboxTTS.from_pretrained(device=model_device)
         chatterbox_model = multilingual_model
         MULTILINGUAL_MODEL_LOADED = True
