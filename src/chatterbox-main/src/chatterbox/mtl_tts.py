@@ -201,6 +201,7 @@ class ChatterboxMultilingualTTS:
                 token=os.getenv("HF_TOKEN"),
             )
         )
+        print(f"---------------------------------------------Model downloaded to: {ckpt_dir}")
         return cls.from_local(ckpt_dir, device)
     
     def prepare_conditionals(self, wav_fpath, exaggeration=0.5):
