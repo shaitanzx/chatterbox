@@ -20,6 +20,7 @@ uvicorn[standard]
 
 # Other ML & Audio Libraries
 numpy>=1.24.0,<1.26.0  # Match chatterbox-v2 requirements
+onnxruntime==1.16.3
 soundfile  # Requires libsndfile system library
 librosa
 safetensors
